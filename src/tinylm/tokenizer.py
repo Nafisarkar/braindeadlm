@@ -20,7 +20,7 @@ class Tokenizer:
         unk_id = vocab["<UNK>"]
         encoded = []
         for token in tokens:
-            vocab.get(token, unk_id)
+            encoded.append(vocab.get(token, unk_id))
         return encoded
     
     # [1, 3, 4] -> [{1:i}, {2:you}, {3:me}]
@@ -32,27 +32,7 @@ class Tokenizer:
         return tokens
         
         
-data = "IdeaWeaver a comprehensive CLI tool"
 
-tool = Tokenizer()
-
-all_tokens = tool.tokenize(data)
-vocab = tool.generate_vocab(all_tokens)
-
-encoding = tool.encode(
-    vocab,
-    "IdeaWeaver a comprehensive -- Banana "
-)
-
-decoding = tool.decode(
-    vocab,
-    encoding
-)
-
-print(all_tokens)
-print(vocab)
-print(encoding)
-print(decoding)
 
 
 
