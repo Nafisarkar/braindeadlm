@@ -23,15 +23,11 @@
 
 ## 3. Training Data
 
-- [ ] Prepare plain-text dataset
-- [ ] Clean dataset
-- [ ] Split into train/validation sets
-- [ ] Convert text into token IDs
-- [ ] Create context windows
-- [ ] Create input/target pairs
-- [ ] Implement `Dataset`
-- [ ] Implement `DataLoader`
-- [ ] Verify batch shapes
+- [x] Prepare plain-text dataset
+- [x] Clean dataset
+- [x] Split into train/validation sets
+- [x] Convert text into token IDs
+
 
 ## 4. Embeddings
 
