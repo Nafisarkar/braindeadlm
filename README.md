@@ -1,152 +1,94 @@
-# ROADMAP
+<div align="center">
 
-## 1. Project Setup
+# braindeadlm
 
-- [x] uv + Python environment setup
-- [x] Configure `pyproject.toml`
-- [x] Verify PyTorch installation
-- [x] Verify CPU/CUDA device
+**a language model so small it makes nanoGPT look like GPT-4**
 
-## 2. Tokenizer
+<br/>
 
-- [x] Implement custom Tokenizer
-- [x] Implement vocabulary
-- [x] Implement text → token IDs
-- [x] Implement token IDs → text
-- [x] Add special tokens
-- [x] Test encode/decode
-- [ ] Add special tokens
-- [ ] Handle unknown tokens
-- [ ] Preserve punctuation
-- [ ] Return decoded text
-- [x] Add tokenizer tests
+_Building an LLM from absolute scratch — tokenizer, dataset, attention, the whole cursed pipeline._
+_No `transformers`. No shortcuts. Just tensors, tea, and poor life decisions._
 
-## 3. Training Data
+<br/>
 
-- [x] Prepare plain-text dataset
-- [x] Clean dataset
-- [x] Split into train/validation sets
-- [x] Convert text into token IDs
+![Python](https://img.shields.io/badge/python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/pytorch-2.x-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
+![Status](https://img.shields.io/badge/status-under_construction-yellow?style=for-the-badge&labelColor=FFD166&color=grey)
+![Vibes](https://img.shields.io/badge/vibes-immaculate-9B5DE5?style=for-the-badge)
+
+[the plan](./ROADMAP.md) · [the code](./src/braindeadlm) · [the crime scene](#known-crimes-aka-todo-later-i-promise)
+
+</div>
+
+---
+
+## what even is this
+
+`braindeadlm` is a personal weekend-project-that-got-out-of-hand: a **tiny language model written from scratch** in Python + PyTorch.
+---
+
+## the receipts
+
+| thing | number | notes |
+|---|---|---|
+| source corpus | 1,000 stories | [TinyStories](https://huggingface.co/datasets/roneneldan/TinyStories) — vocab-level: dragons, friendship, mild weather |
+| train / validation | 950 / 50 | the 50 stories the model is not allowed to peek at |
+| raw corpus | ~934 KB | smaller than one (1) meme folder |
+| vocabulary | **4,568 tokens** | whole language, basically |
+| context length | 16 tokens | goldfish memory. on purpose. for now. |
+| GPU required | lol no | CPU-friendly until further notice |
 
 
-## 4. Embeddings
+## quickstart
 
-- [ ] Implement token embeddings
-- [ ] Implement positional embeddings
-- [ ] Combine token + positional embeddings
-- [ ] Verify embedding dimensions
+```bash
+git clone https://github.com/Nafisarkar/braindeadlm.git
+cd braindeadlm
 
-## 5. Causal Self-Attention
+uv sync                       # summon the dependencies
 
-- [ ] Implement Query, Key, Value projections
-- [ ] Calculate attention scores
-- [ ] Implement scaling
-- [ ] Implement causal mask
-- [ ] Apply softmax
-- [ ] Calculate weighted values
-- [ ] Implement output projection
-- [ ] Test attention output shape
+# 1. grab 1000 tiny stories from HuggingFace
+uv run python -m braindeadlm.prepare_data
 
-## 6. Multi-Head Attention
+# 2. build the vocabulary (4,568 words of pure toddler literature)
+uv run python -m braindeadlm.build_vocab
 
-- [ ] Split embeddings into multiple heads
-- [ ] Run self-attention per head
-- [ ] Concatenate heads
-- [ ] Apply output projection
-- [ ] Verify dimensions
+# 3. peek at training batches
+uv run python tests/test_dataset.py
+```
 
-## 7. Feed-Forward Network
+requirements: **Python 3.12+**, `torch`, `datasets`, `numpy`, and `uv` for the rest.
 
-- [ ] Implement first linear layer
-- [ ] Implement activation function
-- [ ] Implement second linear layer
-- [ ] Test output shape
+> **note:** the data files are regenerable, not committed. if `data/` is empty, run steps 1–2 and the folder will simply manifest.
 
-## 8. Transformer Block
 
-- [ ] Implement LayerNorm
-- [ ] Add attention residual connection
-- [ ] Add feed-forward residual connection
-- [ ] Combine all components
-- [ ] Test forward pass
+---
 
-## 9. TinyLM Model
+## faq
 
-- [ ] Create model configuration
-- [ ] Add token embeddings
-- [ ] Add positional embeddings
-- [ ] Stack Transformer blocks
-- [ ] Add final LayerNorm
-- [ ] Add language-model head
-- [ ] Calculate logits
-- [ ] Verify complete forward pass
+**why not just use an existing LLM?**
+where's the sport in that.
 
-## 10. Loss
+**is it good?**
+it's a lot of things. "good" is not currently one of them. it's *early*.
 
-- [ ] Prepare target tokens
-- [ ] Implement next-token prediction
-- [ ] Implement cross-entropy loss
-- [ ] Verify loss calculation
-- [ ] Test loss decreases on a tiny dataset
+**why TinyStories?**
+the corpus reads like a fever dream narrated by a 5-year-old ("suddenly, they saw a large gust of wind!"). training a transformer on that is objectively funny.
 
-## 11. Training Loop
+**will it run on my laptop?**
+yes. this thing is so tiny it could be out-computed by a determined pocket calculator.
 
-- [ ] Initialize model
-- [ ] Initialize optimizer
-- [ ] Load training batches
-- [ ] Forward pass
-- [ ] Calculate loss
-- [ ] Backpropagation
-- [ ] Optimizer update
-- [ ] Reset gradients
-- [ ] Track training loss
-- [ ] Track validation loss
-- [ ] Add checkpoint saving
+**can it beat GPT-4?**
+it cannot beat a well-organized spreadsheet. but it will beat *not understanding transformers*, which is the actual benchmark.
 
-## 12. Training
+---
 
-- [ ] Train on a tiny dataset
-- [ ] Confirm model can overfit a tiny dataset
-- [ ] Train on the full dataset
-- [ ] Monitor train/validation loss
-- [ ] Save best checkpoint
-- [ ] Resume training from checkpoint
+<div align="center">
 
-## 13. Text Generation
+**built for fun, kept for learning.** ⭐ starring this repo will not improve the model, but it will improve *my* training signal.
 
-- [ ] Load trained checkpoint
-- [ ] Encode prompt
-- [ ] Run model
-- [ ] Get next-token probabilities
-- [ ] Select/sample next token
-- [ ] Append token
-- [ ] Repeat generation
-- [ ] Decode tokens to text
+<br/>
 
-## 14. Evaluation
+<sub>no GPUs were harmed in the making of this project · several optimizer steps were · MIT-ish, do what you want</sub>
 
-- [ ] Test different prompts
-- [ ] Compare training/validation loss
-- [ ] Check generated text quality
-- [ ] Test different temperatures
-- [ ] Test top-k sampling
-- [ ] Document results
-
-## 15. Improve TinyLM
-
-- [ ] Experiment with model size
-- [ ] Experiment with context length
-- [ ] Experiment with vocabulary size
-- [ ] Experiment with learning rate
-- [ ] Experiment with batch size
-- [ ] Compare experiments
-
-## 16. JavaScript Model
-
-- [ ] Collect JavaScript/TypeScript dataset
-- [ ] Clean code dataset
-- [ ] Train/adjust tokenizer
-- [ ] Prepare code training data
-- [ ] Train TinyLM on JavaScript
-- [ ] Test code completion
-- [ ] Evaluate generated JavaScript
+</div>

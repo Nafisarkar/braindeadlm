@@ -1,5 +1,5 @@
 from pathlib import Path
-from tinylm.tokenizer import Tokenizer
+from braindeadlm.tokenizer import Tokenizer
 import json
 
 DATA_FILE = Path("data/train.txt")

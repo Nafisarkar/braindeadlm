@@ -1,9 +1,9 @@
 import json
 from pathlib import Path
-
-from tinylm.dataset import TextDataset
-from tinylm.tokenizer import Tokenizer
-
+from braindeadlm.tool import clear_screen_safe
+from braindeadlm.dataset import TextDataset
+from braindeadlm.tokenizer import Tokenizer
+from  torch.utils.data import DataLoader
 
 DATA_FILE = Path("data/train.txt")
 VOCAB_FILE = Path("data/vocab.json")
@@ -22,6 +22,7 @@ def main():
         )
     )
 
+    # Create DataLoader
     dataset = TextDataset(
         text=text,
         tokenizer=tokenizer,
@@ -29,19 +30,24 @@ def main():
         context_length=16,
     )
 
+    clear_screen_safe()
     print("Dataset size:", len(dataset))
+    
+    
+    loader = DataLoader(dataset,
+    batch_size=32,
+    shuffle=True)
 
-    for idx in range(10):
-        input_ids, target_ids = dataset[idx]
+    inputs, targets = next(iter(loader))
 
-        print("Input:")
-        print(input_ids)
+    print("Inputs shape:", inputs.shape)
+    print("Targets shape:", targets.shape)
 
-        print("Target:")
-        print(target_ids)
+    print("Inputs:")
+    print(inputs)
 
-        print("Input shape:", input_ids.shape)
-        print("Target shape:", target_ids.shape)
+    print("Targets:")
+    print(targets)
 
 
 if __name__ == "__main__":

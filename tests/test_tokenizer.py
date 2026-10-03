@@ -1,4 +1,4 @@
-from tinylm.tokenizer import Tokenizer
+from braindeadlm.tokenizer import Tokenizer
 
 data = "IdeaWeaver a comprehensive CLI tool"
 

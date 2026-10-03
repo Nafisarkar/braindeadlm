@@ -1,7 +1,7 @@
 [project]
-name = "tinylm"
+name = "braindeadlm"
 version = "0.1.0"
-description = "Add your description here"
+description = "BrainDeadLM - a language model built from absolute scratch"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -11,7 +11,7 @@ dependencies = [
 ]
 
 [project.scripts]
-tinylm = "tinylm:main"
+braindeadlm = "braindeadlm:main"
 
 [build-system]
 requires = ["uv_build>=0.12.21,<0.13.0"]

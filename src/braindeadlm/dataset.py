@@ -1,8 +1,7 @@
-from pathlib import Path
 import torch
 from torch.fft import Tensor
 from torch.utils.data import Dataset
-from tinylm.tokenizer import Tokenizer
+from braindeadlm.tokenizer import Tokenizer
 
 class TextDataset(Dataset):
     def __init__(self,
@@ -16,7 +15,7 @@ class TextDataset(Dataset):
     def __len__(self):
         return len(self.tokens) - self.context_length
     
-    def __getitem__(self, index) -> tuple[Tensor, Tensor]:
+    def __getitem__(self, index:int) -> tuple[Tensor, Tensor]:
         start = index
         end = start + self.context_length
         input_ids = self.tokens[start:end]

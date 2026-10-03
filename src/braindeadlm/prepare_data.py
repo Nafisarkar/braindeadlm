@@ -16,10 +16,12 @@ VALIDATION_FILE = DATA_DIR / "validation.txt"
 
 
 def main():
+    
     print("Loading TinyStories...")
     
     dataset = load_dataset("roneneldan/TinyStories",split="train",streaming=True)
     stories = []
+    
     print(f"Collecting {NUM_STORIES} stories...")
     
     for story in dataset:
