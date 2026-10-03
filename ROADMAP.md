@@ -23,12 +23,12 @@
 - [x] Split into train/validation sets
 - [x] Convert text into token IDs
 - [x] Sequence preparation
-- [ ] Implement PyTorch `Dataset`
-- [ ] Implement `DataLoader`
-- [ ] Verify batch shapes
+- [x] Implement PyTorch `Dataset`
+- [x] Implement `DataLoader`
+- [x] Verify batch shapes
 
 ## 4. Embeddings
-- [ ] Implement token embeddings
+- [x] Implement token embeddings
 - [ ] Implement positional embeddings
 - [ ] Combine token + positional embeddings
 - [ ] Verify embedding dimensions
