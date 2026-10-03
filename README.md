@@ -19,7 +19,7 @@
 - [ ] Handle unknown tokens
 - [ ] Preserve punctuation
 - [ ] Return decoded text
-- [ ] Add tokenizer tests
+- [x] Add tokenizer tests
 
 ## 3. Training Data
 

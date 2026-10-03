@@ -6,7 +6,7 @@ class Tokenizer:
         return [token.lower() for token in re.findall(r'\w+', text)]
     
     def generate_vocab (self, all_tokens:list[str]) -> dict[str,int]:
-        unique_tokens = list(set(all_tokens));
+        unique_tokens = sorted(set(all_tokens));
         vocab = {
             "<UNK>": 0
         }
@@ -28,7 +28,7 @@ class Tokenizer:
         inv_vocab = {v: k for k, v in vocab.items()}
         tokens = []
         for idx in encoding:
-            tokens.append(inv_vocab.get(idx))
+            tokens.append(inv_vocab.get(idx, "<UNK>"))
         return tokens
         
         
