@@ -15,6 +15,11 @@
 - [x] Implement token IDs → text
 - [x] Add special tokens
 - [x] Test encode/decode
+- [ ] Add special tokens
+- [ ] Handle unknown tokens
+- [ ] Preserve punctuation
+- [ ] Return decoded text
+- [ ] Add tokenizer tests
 
 ## 3. Training Data
 

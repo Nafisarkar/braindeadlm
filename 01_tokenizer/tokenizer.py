@@ -7,14 +7,21 @@ class Tokenizer:
     
     def generate_vocab (self, all_tokens:list[str]) -> dict[str,int]:
         unique_tokens = list(set(all_tokens));
-        sorted_tokens = sorted(unique_tokens)    
-        return {idx:token for token,idx in enumerate(sorted_tokens)}
+        vocab = {
+            "<UNK>": 0
+        }
+        for idx, token in enumerate(unique_tokens, start=1):
+            vocab[token] = idx
+        return vocab
     
     def encode (self, vocab:dict[str,int], text:str) -> list[int]:
         ids = []
         tokens = self.tokenize(text)
         for token in tokens:
-            ids.append(vocab.get(token))
+            if vocab.get(token) == None :
+                tokens.append("<UNK>")
+            else:
+                ids.append(vocab.get(token))
         return ids;
     
     def decode (self, vocab:dict[str,int],encoding:list[int]) -> list[str]:
@@ -28,12 +35,22 @@ class Tokenizer:
         
 
 
-data = "IdeaWeaver-- a comprehensive CLI tool for AI model training and evaluation? ai"
-tool = Tokenizer();
+data = "IdeaWeaver a comprehensive CLI tool"
+
+tool = Tokenizer()
+
 all_tokens = tool.tokenize(data)
 vocab = tool.generate_vocab(all_tokens)
-encoding = tool.encode(vocab,data)
-decoding = tool.decode(vocab,encoding)
+
+encoding = tool.encode(
+    vocab,
+    "IdeaWeaver a banana comprehensive -- "
+)
+
+decoding = tool.decode(
+    vocab,
+    encoding
+)
 
 print(all_tokens)
 print(vocab)
