@@ -31,16 +31,17 @@ def main():
 
     print("Dataset size:", len(dataset))
 
-    input_ids, target_ids = dataset[0]
+    for idx in range(10):
+        input_ids, target_ids = dataset[idx]
 
-    print("Input:")
-    print(input_ids)
+        print("Input:")
+        print(input_ids)
 
-    print("Target:")
-    print(target_ids)
+        print("Target:")
+        print(target_ids)
 
-    print("Input shape:", input_ids.shape)
-    print("Target shape:", target_ids.shape)
+        print("Input shape:", input_ids.shape)
+        print("Target shape:", target_ids.shape)
 
 
 if __name__ == "__main__":
