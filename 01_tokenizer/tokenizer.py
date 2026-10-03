@@ -14,17 +14,17 @@ class Tokenizer:
             vocab[token] = idx
         return vocab
     
+    # [{1:i}, {2:you}, {3:me}] -> [1, 3, 4]
     def encode (self, vocab:dict[str,int], text:str) -> list[int]:
-        ids = []
         tokens = self.tokenize(text)
+        unk_id = vocab["<UNK>"]
+        encoded = []
         for token in tokens:
-            if vocab.get(token) == None :
-                tokens.append("<UNK>")
-            else:
-                ids.append(vocab.get(token))
-        return ids;
+            vocab.get(token, unk_id)
+        return encoded
     
-    def decode (self, vocab:dict[str,int],encoding:list[int]) -> list[str]:
+    # [1, 3, 4] -> [{1:i}, {2:you}, {3:me}]
+    def decode (self, vocab:dict[str,int], encoding:list[int]) -> list[str]:
         inv_vocab = {v: k for k, v in vocab.items()}
         tokens = []
         for idx in encoding:
@@ -32,9 +32,6 @@ class Tokenizer:
         return tokens
         
         
-        
-
-
 data = "IdeaWeaver a comprehensive CLI tool"
 
 tool = Tokenizer()
@@ -44,7 +41,7 @@ vocab = tool.generate_vocab(all_tokens)
 
 encoding = tool.encode(
     vocab,
-    "IdeaWeaver a banana comprehensive -- "
+    "IdeaWeaver a comprehensive -- Banana "
 )
 
 decoding = tool.decode(
